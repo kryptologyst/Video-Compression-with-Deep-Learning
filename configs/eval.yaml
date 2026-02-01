@@ -1,0 +1,30 @@
+# Evaluation configuration for video compression
+model:
+  type: "video_autoencoder"
+  checkpoint_path: "checkpoints/best.pth"
+  input_channels: 3
+  latent_channels: 64
+  num_residual_blocks: 4
+
+data:
+  data_dir: "data/raw"
+  frame_size: [224, 224]
+  sequence_length: 8
+  max_frames: null
+  num_workers: 4
+
+evaluation:
+  batch_size: 1
+  save_reconstructions: true
+  output_dir: "assets/reconstructions"
+  metrics:
+    - "psnr"
+    - "ssim"
+    - "compression_ratio"
+    - "bpp"
+
+logging:
+  log_dir: "logs/evaluation"
+  use_wandb: false
+
+seed: 42
